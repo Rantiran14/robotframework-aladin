@@ -1,34 +1,145 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 4.1.3 (Python 3.10.0 on darwin)" generated="20220218 10:11:22.736" rpa="false" schemaversion="2">
-<suite id="s1" name="Login" source="/Users/andikaprananto/PycharmProjects/WebTry/Test/WEBMOB/Login.robot">
-<test id="s1-t1" name="TC001">
-<kw name="When Open MyHeadless Keyword" library="Browsers">
+<robot generator="Robot 4.1.3 (Python 3.10.2 on darwin)" generated="20220310 20:32:09.993" rpa="false" schemaversion="2">
+<suite id="s1" name="Register" source="/Users/ranti/Documents/automation-web-RF/Test/WEBDES/Register.robot">
+<test id="s1-t1" name="TC001 Success Register By Email">
+<kw name="Generate Random String" library="String">
+<var>${RANDOM_NUMBER}</var>
+<arg>4</arg>
+<arg>0123</arg>
+<doc>Generates a string with a desired ``length`` from the given ``chars``.</doc>
+<msg timestamp="20220310 20:32:10.348" level="INFO">${RANDOM_NUMBER} = 1002</msg>
+<status status="PASS" starttime="20220310 20:32:10.348" endtime="20220310 20:32:10.348"/>
+</kw>
+<kw name="Catenate" library="BuiltIn">
+<var>${GENERATE_EMAIL}</var>
+<arg>${RANDOM_NUMBER}</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<msg timestamp="20220310 20:32:10.349" level="INFO">${GENERATE_EMAIL} = 1002</msg>
+<status status="PASS" starttime="20220310 20:32:10.348" endtime="20220310 20:32:10.349"/>
+</kw>
+<kw name="Open MyHeadless Keyword" library="Browsers">
+<kw name="Evaluate" library="BuiltIn">
+<var>${options}</var>
+<arg>sys.modules['selenium.webdriver'].ChromeOptions()</arg>
+<arg>sys, selenium.webdriver</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20220310 20:32:10.349" level="INFO">${options} = &lt;selenium.webdriver.chrome.options.Options object at 0x10b4e08e0&gt;</msg>
+<status status="PASS" starttime="20220310 20:32:10.349" endtime="20220310 20:32:10.350"/>
+</kw>
+<kw name="Call Method" library="BuiltIn">
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>--headless</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" starttime="20220310 20:32:10.350" endtime="20220310 20:32:10.350"/>
+</kw>
 <kw name="Open Browser" library="SeleniumLibrary">
-<arg>${HOST_WEBMOB}</arg>
-<arg>Chrome</arg>
+<arg>${HOST_WEBDES}</arg>
+<arg>chrome</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<msg timestamp="20220218 10:11:23.872" level="INFO">Opening browser 'Chrome' to base url 'https://staging-m.misteralad.in/'.</msg>
-<status status="PASS" starttime="20220218 10:11:23.871" endtime="20220218 10:11:31.554"/>
+<msg timestamp="20220310 20:32:10.350" level="INFO">Opening browser 'chrome' to base url 'https://staging.misteralad.in/'.</msg>
+<status status="PASS" starttime="20220310 20:32:10.350" endtime="20220310 20:32:18.936"/>
 </kw>
 <kw name="Maximize Browser Window" library="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" starttime="20220218 10:11:31.555" endtime="20220218 10:11:31.775"/>
+<status status="PASS" starttime="20220310 20:32:18.938" endtime="20220310 20:32:19.193"/>
 </kw>
-<status status="PASS" starttime="20220218 10:11:23.871" endtime="20220218 10:11:31.775"/>
+<status status="PASS" starttime="20220310 20:32:10.349" endtime="20220310 20:32:19.196"/>
 </kw>
-<status status="PASS" starttime="20220218 10:11:23.870" endtime="20220218 10:11:31.779"/>
+<kw name="Click Login Button On Login Page" library="LoginByEmail">
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${login}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220310 20:32:19.197" endtime="20220310 20:32:19.295"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${login}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220310 20:32:19.297" level="INFO">Clicking element 'css=#site-header &gt; div &gt; div &gt; div.col-9 &gt; nav &gt; ul &gt; li.nav-item.nav-border &gt; a'.</msg>
+<status status="PASS" starttime="20220310 20:32:19.296" endtime="20220310 20:32:19.431"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20220310 20:32:24.433" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" starttime="20220310 20:32:19.431" endtime="20220310 20:32:24.433"/>
+</kw>
+<status status="PASS" starttime="20220310 20:32:19.196" endtime="20220310 20:32:24.434"/>
+</kw>
+<kw name="Login Using Credentials" library="LoginByEmail">
+<arg>test${GENERATE_EMAIL}@mailinator</arg>
+<arg>${PASSWORD}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${popup}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220310 20:32:24.436" endtime="20220310 20:32:24.476"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${ok_popup}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220310 20:32:24.476" level="INFO">Clicking element 'css=button#optInText'.</msg>
+<status status="PASS" starttime="20220310 20:32:24.476" endtime="20220310 20:32:24.522"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${field_email}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220310 20:32:24.523" endtime="20220310 20:32:24.610"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${field_email}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220310 20:32:24.610" level="INFO">Clicking element 'id=email'.</msg>
+<status status="PASS" starttime="20220310 20:32:24.610" endtime="20220310 20:32:24.660"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${field_email}</arg>
+<arg>${EMAIL}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20220310 20:32:24.660" level="INFO">Typing text 'test1002@mailinator' into text field 'id=email'.</msg>
+<status status="PASS" starttime="20220310 20:32:24.660" endtime="20220310 20:32:24.925"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${field_password}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220310 20:32:24.926" level="INFO">Clicking element 'id=password'.</msg>
+<status status="PASS" starttime="20220310 20:32:24.925" endtime="20220310 20:32:25.016"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${field_password}</arg>
+<arg>${PASSWORD}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20220310 20:32:25.017" level="INFO">Typing text 'Tester123!' into text field 'id=password'.</msg>
+<status status="PASS" starttime="20220310 20:32:25.017" endtime="20220310 20:32:25.132"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${btn_login}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20220310 20:32:25.132" endtime="20220310 20:32:25.157"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${btn_login}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20220310 20:32:25.158" level="INFO">Clicking element 'css=#login-form &gt; button'.</msg>
+<status status="PASS" starttime="20220310 20:32:25.157" endtime="20220310 20:32:25.213"/>
+</kw>
+<status status="PASS" starttime="20220310 20:32:24.434" endtime="20220310 20:32:25.214"/>
+</kw>
+<doc>Success Register Browser By Email</doc>
+<tag>Regression</tag>
+<status status="PASS" starttime="20220310 20:32:10.347" endtime="20220310 20:32:25.214"/>
 </test>
 <doc>Regression Login Page Aladin</doc>
-<status status="PASS" starttime="20220218 10:11:22.740" endtime="20220218 10:11:31.788"/>
+<status status="PASS" starttime="20220310 20:32:09.995" endtime="20220310 20:32:25.218"/>
 </suite>
 <statistics>
 <total>
 <stat pass="1" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
+<stat pass="1" fail="0" skip="0">Regression</stat>
 </tag>
 <suite>
-<stat pass="1" fail="0" skip="0" id="s1" name="Login">Login</stat>
+<stat pass="1" fail="0" skip="0" id="s1" name="Register">Register</stat>
 </suite>
 </statistics>
 <errors>
